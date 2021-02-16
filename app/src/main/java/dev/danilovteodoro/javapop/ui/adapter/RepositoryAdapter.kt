@@ -21,8 +21,11 @@ class RepositoryAdapter(context: Context):RecyclerView.Adapter<RepositoryViewHol
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
         val current = repos[position]
         holder.binding.txtName.text = current.name
-        holder.binding.txtDescription.text = current.description
+        holder.binding.txtDescription.text = current.description.trim()
         holder.binding.txtUsername.text = current.owner.login
+        holder.binding.txtFullname.text = current.fullName
+        holder.binding.txtFork.text = current.forksCount.toString()
+        holder.binding.txtStar.text = current.starCount.toString()
         Picasso.get().load(current.owner.avatarUrl)
             .into(holder.binding.imgAvatar)
     }

@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="contentColor">#111111</color>
     <color name="titleColor">#0366d6</color>
+    <color name="fullNameColor">#586069</color>
+    <color name="gold">#FDCC0D</color>
+
 </resources>

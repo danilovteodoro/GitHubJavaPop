@@ -26,4 +26,13 @@
         <item name="android:textColor">@color/titleColor</item>
         <item name="android:textSize">@dimen/text14Dimen</item>
     </style>
+    <style name="fullNameStyle">
+        <item name="android:textColor">@color/fullNameColor</item>
+        <item name="android:textSize">@dimen/text12Dimen</item>
+    </style>
+
+    <style name="goldText">
+        <item name="android:textColor">@color/gold</item>
+        <item name="android:textSize">@dimen/text18Dimen</item>
+    </style>
 </resources>
