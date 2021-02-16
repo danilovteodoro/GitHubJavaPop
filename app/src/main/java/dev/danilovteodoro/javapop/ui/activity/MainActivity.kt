@@ -1,7 +1,8 @@
-package dev.danilovteodoro.javapop
+package dev.danilovteodoro.javapop.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dev.danilovteodoro.javapop.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
