@@ -22,4 +22,8 @@
         <item name="android:textColor">@color/contentColor</item>
         <item name="android:textSize">@dimen/text14Dimen</item>
     </style>
+    <style name="userNameStyle">
+        <item name="android:textColor">@color/titleColor</item>
+        <item name="android:textSize">@dimen/text14Dimen</item>
+    </style>
 </resources>

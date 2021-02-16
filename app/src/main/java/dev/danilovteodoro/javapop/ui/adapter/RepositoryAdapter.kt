@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import dev.danilovteodoro.javapop.R
 import dev.danilovteodoro.javapop.model.Repository
 import dev.danilovteodoro.javapop.ui.adapter.viewholder.RepositoryViewHolder
@@ -21,6 +22,9 @@ class RepositoryAdapter(context: Context):RecyclerView.Adapter<RepositoryViewHol
         val current = repos[position]
         holder.binding.txtName.text = current.name
         holder.binding.txtDescription.text = current.description
+        holder.binding.txtUsername.text = current.owner.login
+        Picasso.get().load(current.owner.avatarUrl)
+            .into(holder.binding.imgAvatar)
     }
 
     override fun getItemCount(): Int {
