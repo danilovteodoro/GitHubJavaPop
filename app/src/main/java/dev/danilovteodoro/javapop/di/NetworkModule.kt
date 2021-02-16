@@ -5,6 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import dev.danilovteodoro.javapop.network.api.RepositoryApi
 import dev.danilovteodoro.javapop.util.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,5 +27,11 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepositoryApi(retrofit:Retrofit.Builder):RepositoryApi{
+       return retrofit.build().create(RepositoryApi::class.java)
     }
 }
