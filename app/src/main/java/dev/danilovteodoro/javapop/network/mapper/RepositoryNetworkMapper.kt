@@ -30,4 +30,8 @@ class RepositoryNetworkMapper @Inject constructor(
             forksCount = d.forksCount
         )
     }
+
+    fun mapFromEntityList(entities:List<RepositoryNetwork>) : List<Repository>{
+        return entities.map { e -> mapFromEntity(e) }
+    }
 }
