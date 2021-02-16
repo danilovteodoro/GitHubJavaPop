@@ -16,7 +16,8 @@ class RepositoryNetworkMapper @Inject constructor(
             description = e.description,
             owner = ownerNetworkMapper.mapFromEntity(e.owner),
             starCount = e.starCount,
-            forksCount = e.forksCount
+            forksCount = e.forksCount,
+            fullName = e.fullName
         )
     }
 
@@ -27,7 +28,8 @@ class RepositoryNetworkMapper @Inject constructor(
             description = d.description,
             owner = ownerNetworkMapper.mapToEntity(d.owner),
             starCount = d.starCount,
-            forksCount = d.forksCount
+            forksCount = d.forksCount,
+            fullName = d.fullName
         )
     }
 

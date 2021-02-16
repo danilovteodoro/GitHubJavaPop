@@ -6,5 +6,6 @@ data class Repository(
     val description:String,
     val owner: RepositoryOwner ,
     val starCount:Long,
-    val forksCount:Long
+    val forksCount:Long,
+    val fullName:String
 )

@@ -15,5 +15,7 @@ data class RepositoryNetwork(
     @SerializedName("stargazers_count")
     val starCount:Long,
     @SerializedName("forks_count")
-    val forksCount:Long
+    val forksCount:Long,
+    @SerializedName("full_name")
+    val fullName:String
 )
