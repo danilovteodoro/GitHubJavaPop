@@ -1,10 +1,12 @@
-package dev.danilovteodoro.javapop.model
+package dev.danilovteodoro.javapop.network
 
-data class Repository(
+
+
+data class RepositoryNetwork(
     val id:Long,
     val name:String,
     val description:String,
-    val owner: RepositoryOwner ,
+    val owner:OwnerNetwork,
     val starCount:Long,
     val forksCount:Long
 )
