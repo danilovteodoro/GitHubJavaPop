@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text14Dimen">14sp</dimen>
+    <dimen name="text16Dimen">16sp</dimen>
+    <dimen name="text18Dimen">18sp</dimen>
+    <dimen name="text20Dimen">20sp</dimen>
+    <dimen name="appbarSize">300dp</dimen>
+    <dimen name="statusBarPadding">24dp</dimen>
+</resources>

@@ -10,7 +10,7 @@ import util.DataState
 import javax.inject.Inject
 
 @HiltViewModel
-class GitRepoViewHolder @Inject constructor(
+class GitRepoViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val repository: GitRepoRepository
 ):ViewModel(){
