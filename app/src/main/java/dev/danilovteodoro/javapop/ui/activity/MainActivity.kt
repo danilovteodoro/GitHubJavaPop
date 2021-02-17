@@ -47,7 +47,9 @@ class MainActivity : AppCompatActivity() {
         setupRcRepositories()
         setupDrawerToogle()
         registerObserver()
-        viewModel.callAction(GitRepoActions.GetRepos)
+        if (viewModel.repositoriesLv.value == null){
+            viewModel.callAction(GitRepoActions.GetRepos)
+        }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -132,6 +134,18 @@ class MainActivity : AppCompatActivity() {
                     hideProgress()
                     adapter.add(dataState.value)
                 }
+                is DataState.ServerError ->{
+                    hideProgress()
+                    showError(getString(R.string.error_server),R.drawable.ic_error_outline)
+                }
+                is DataState.TimeoutError ->{
+                    hideProgress()
+                    showError(getString(R.string.error_timeout),R.drawable.ic_error_outline)
+                }
+                is DataState.NoConnection ->{
+                    hideProgress()
+                    showError(getString(R.string.error_network),R.drawable.ic_network)
+                }
             }
         })
 
@@ -160,6 +174,23 @@ class MainActivity : AppCompatActivity() {
         binding.rcRepositories.visibility = View.VISIBLE
         binding.progress.visibility = View.GONE
     }
+
+    private fun showError(errorMessage:String,icon:Int){
+        showError()
+        binding.layoutError.txtErrorMessage.text = errorMessage
+        binding.layoutError.imgError.setImageResource(icon)
+    }
+    private fun showError(){
+        binding.layoutError.main.visibility = View.VISIBLE
+        binding.rcRepositories.visibility = View.GONE
+    }
+
+    private fun hideError(){
+        binding.layoutError.main.visibility = View.GONE
+        binding.rcRepositories.visibility = View.VISIBLE
+    }
+
+
 
 
 }

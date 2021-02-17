@@ -6,4 +6,10 @@
     <string name="menuSoretRepoStar">Sort repositories by star</string>
     <string name="menuSoretRepoName">Sort repositories by name</string>
     <string name="menuSoretRepoFork">Sort repositories by fork</string>
+    <string name="str_retry">Tentar Novamente</string>
+    <string name="descriptionIconNetwork">Network</string>
+    <string name="error_network"> Conexão Indisponível! Tente novamente mais tarde.</string>
+    <string name="error_server"> Estamos com problemas em nossos Servidores! Tente novamente mais tarde.</string>
+    <string name="error_generic"> Ocorreu um erro inesperado! Tente novamente mais tarde.</string>
+    <string name="error_timeout">Tempo de conexão exedido! Tente novamente mais tarde</string>
 </resources>

@@ -5,6 +5,7 @@
     <dimen name="text16Dimen">16sp</dimen>
     <dimen name="text18Dimen">18sp</dimen>
     <dimen name="text20Dimen">20sp</dimen>
+    <dimen name="text24Dimen">24sp</dimen>
     <dimen name="appbarSize">300dp</dimen>
     <dimen name="statusBarPadding">24dp</dimen>
 </resources>
