@@ -39,6 +39,19 @@ class GitRepoViewModel @Inject constructor(
         }
     }
 
+    private fun sort(sortBy: SortBy){
+        _repositoriesLv.value?.let { dataState ->
+            if (dataState is DataState.Success){
+                 val sorted = when(sortBy){
+                     SortBy.NAME -> dataState.value.sortedBy { gitHubRepo -> gitHubRepo.name }
+                     SortBy.STAR -> dataState.value.sortedBy { gitHubRepo -> gitHubRepo.starCount }
+                     else -> dataState.value.sortedBy { gitHubRepo -> gitHubRepo.forksCount }
+                 }
+                _repositoriesLv.value = DataState.Success(sorted)
+            }
+        }
+    }
+
     fun callAction(action:GitRepoActions){
         when(action){
             is GitRepoActions.GetRepos ->{
@@ -50,6 +63,15 @@ class GitRepoViewModel @Inject constructor(
             is GitRepoActions.EndSearch ->{
                 _searchedRepositories.value = SearchSatate.None
             }
+            is GitRepoActions.SortByName -> {
+                sort(SortBy.NAME)
+            }
+            is GitRepoActions.SortByStar -> {
+                sort(SortBy.STAR)
+            }
+            is GitRepoActions.SortByFork -> {
+                sort(SortBy.FORK)
+            }
         }
     }
 
@@ -59,9 +81,16 @@ sealed class GitRepoActions {
     object GetRepos : GitRepoActions()
     data class Search(val search:String) : GitRepoActions()
     object EndSearch : GitRepoActions()
+    object SortByName : GitRepoActions()
+    object SortByStar : GitRepoActions()
+    object SortByFork : GitRepoActions()
 }
 
 sealed class SearchSatate {
     object None : SearchSatate()
     data class Done(val value:List<Repository>) : SearchSatate()
+}
+
+private enum class SortBy {
+    NAME,STAR,FORK
 }

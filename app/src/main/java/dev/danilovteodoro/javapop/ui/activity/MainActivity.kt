@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
@@ -109,15 +110,26 @@ class MainActivity : AppCompatActivity() {
         binding.drawerLayout.post {
             drawerToggle.syncState()
         }
+
+        binding.mainNavigation.setNavigationItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.menuSortByRepoName -> viewModel.callAction(GitRepoActions.SortByName)
+                R.id.menuSortByRepoStar -> viewModel.callAction(GitRepoActions.SortByStar)
+                R.id.menuSortByRepoFork -> viewModel.callAction(GitRepoActions.SortByFork)
+            }
+            binding.drawerLayout.closeDrawers()
+            true
+        }
     }
 
     private fun registerObserver(){
         viewModel.repositoriesLv.observe(this, Observer { dataState->
             when(dataState){
                 is DataState.Loading -> {
-                    println("loading")
+                    showProgress()
                 }
                 is DataState.Success -> {
+                    hideProgress()
                     adapter.add(dataState.value)
                 }
             }
@@ -137,6 +149,16 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun showProgress(){
+        binding.rcRepositories.visibility = View.GONE
+        binding.progress.visibility = View.VISIBLE
+    }
+
+    private fun hideProgress(){
+        binding.rcRepositories.visibility = View.VISIBLE
+        binding.progress.visibility = View.GONE
     }
 
 
