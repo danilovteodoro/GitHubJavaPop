@@ -13,7 +13,8 @@
         android:theme="@style/Theme.JavaPop"
         android:name=".ui.MainApplication">
         <activity android:name=".ui.activity.MainActivity"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.JavaPop.notitle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,9 @@
 <resources>
-    <string name="app_name">JavaPop</string>
+    <string name="app_name">GitHub JavaPop</string>
     <string name="search_hint">Search for GitHub repositories</string>
+    <string name="str_open">Open</string>
+    <string name="str_close">Close</string>
+    <string name="menuSoretRepoStar">Sort repositories by star</string>
+    <string name="menuSoretRepoName">Sort repositories by name</string>
+    <string name="menuSoretRepoFork">Sort repositories by fork</string>
 </resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menuSortByRepoName"
+        android:title="@string/menuSoretRepoName"
+        android:icon="@drawable/ic_sort"/>
+    <item android:id="@+id/menuSortByRepoStar"
+        android:title="@string/menuSoretRepoStar"
+        android:icon="@drawable/ic_star"/>
+    <item android:id="@+id/menuSortByRepoFork"
+        android:title="@string/menuSoretRepoFork"
+        android:icon="@drawable/ic_code_fork"/>
+
+</menu>

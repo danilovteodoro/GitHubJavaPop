@@ -10,7 +10,9 @@ import android.provider.SearchRecentSuggestions
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,12 +35,16 @@ class MainActivity : AppCompatActivity() {
     private val binding:ActivityMainBinding get() = _binding!!
     private val viewModel:GitRepoViewModel by viewModels()
     private lateinit var adapter:RepositoryAdapter
+    private lateinit var drawerToggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.appbar)
+        title = ""
         setupRcRepositories()
+        setupDrawerToogle()
         registerObserver()
         viewModel.callAction(GitRepoActions.GetRepos)
     }
@@ -85,6 +91,24 @@ class MainActivity : AppCompatActivity() {
         adapter = RepositoryAdapter(this)
         binding.rcRepositories.layoutManager = LinearLayoutManager(this)
         binding.rcRepositories.adapter = adapter
+    }
+
+    fun setupDrawerToogle(){
+        drawerToggle = object : ActionBarDrawerToggle(this,binding.drawerLayout,
+        binding.appbar,R.string.str_open,R.string.str_close){
+            override fun onDrawerOpened(drawerView: View) {
+                super.onDrawerOpened(drawerView)
+                invalidateOptionsMenu()
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                super.onDrawerClosed(drawerView)
+                invalidateOptionsMenu()
+            }
+        }
+        binding.drawerLayout.post {
+            drawerToggle.syncState()
+        }
     }
 
     private fun registerObserver(){
