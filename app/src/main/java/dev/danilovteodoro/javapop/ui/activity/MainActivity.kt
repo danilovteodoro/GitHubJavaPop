@@ -21,6 +21,7 @@ import dev.danilovteodoro.javapop.model.Repository
 import dev.danilovteodoro.javapop.ui.adapter.RepositoryAdapter
 import dev.danilovteodoro.javapop.ui.viewmodel.GitRepoActions
 import dev.danilovteodoro.javapop.ui.viewmodel.GitRepoViewModel
+import dev.danilovteodoro.javapop.ui.viewmodel.SearchSatate
 import dev.danilovteodoro.javapop.util.AppSuggestionProvider
 import util.DataState
 import java.lang.StringBuilder
@@ -48,9 +49,10 @@ class MainActivity : AppCompatActivity() {
                 SearchRecentSuggestions(this,
                         AppSuggestionProvider.AUTHORITY,AppSuggestionProvider.MODE)
                         .saveRecentQuery(query,null)
+                viewModel.callAction(GitRepoActions.Search(query))
             }
         }
-        menuItemPesquisar?.collapseActionView()
+//        menuItemPesquisar?.collapseActionView()
         super.onNewIntent(intent)
     }
 
@@ -58,6 +60,16 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.main_menu,menu)
         menuItemPesquisar = menu.findItem(R.id.menuPesquisar)
         val searchView = menuItemPesquisar?.actionView as SearchView
+        menuItemPesquisar?.setOnActionExpandListener(object : MenuItem.OnActionExpandListener{
+            override fun onMenuItemActionExpand(item: MenuItem?): Boolean {
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem?): Boolean {
+                viewModel.callAction(GitRepoActions.EndSearch)
+                return true
+            }
+        })
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         searchView.apply {
             try {
@@ -83,6 +95,21 @@ class MainActivity : AppCompatActivity() {
                 }
                 is DataState.Success -> {
                     adapter.add(dataState.value)
+                }
+            }
+        })
+
+        viewModel.searchedRepositories.observe(this, Observer { searchState->
+            when(searchState){
+                is SearchSatate.Done -> {
+                    adapter.add(searchState.value)
+                }
+                is SearchSatate.None ->{
+                    viewModel.repositoriesLv.value?.let { dataState ->
+                        if(dataState is DataState.Success){
+                            adapter.add(dataState.value)
+                        }
+                    }
                 }
             }
         })
