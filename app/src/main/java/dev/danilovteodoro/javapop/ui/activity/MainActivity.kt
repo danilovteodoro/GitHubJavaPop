@@ -17,6 +17,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.danilovteodoro.javapop.R
 import dev.danilovteodoro.javapop.databinding.ActivityMainBinding
@@ -47,7 +48,12 @@ class MainActivity : AppCompatActivity() {
         setupRcRepositories()
         setupDrawerToogle()
         registerObserver()
+        binding.layoutError.btnRetry.setOnClickListener {
+            hideError()
+            viewModel.callAction(GitRepoActions.GetRepos)
+        }
         if (viewModel.repositoriesLv.value == null){
+
             viewModel.callAction(GitRepoActions.GetRepos)
         }
     }
@@ -142,10 +148,17 @@ class MainActivity : AppCompatActivity() {
                     hideProgress()
                     showError(getString(R.string.error_timeout),R.drawable.ic_error_outline)
                 }
+                is DataState.Error -> {
+                    hideProgress()
+                    showError(getString(R.string.error_generic),R.drawable.ic_error_outline)
+                }
                 is DataState.NoConnection ->{
                     hideProgress()
                     showError(getString(R.string.error_network),R.drawable.ic_network)
+                    Snackbar.make(binding.root,R.string.error_network,Snackbar.LENGTH_SHORT)
+                            .show()
                 }
+
             }
         })
 
