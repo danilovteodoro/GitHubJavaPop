@@ -11,24 +11,23 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dev.danilovteodoro.javapop.R
 import dev.danilovteodoro.javapop.databinding.ActivityMainBinding
-import dev.danilovteodoro.javapop.model.Repository
 import dev.danilovteodoro.javapop.ui.adapter.RepositoryAdapter
 import dev.danilovteodoro.javapop.ui.viewmodel.GitRepoActions
 import dev.danilovteodoro.javapop.ui.viewmodel.GitRepoViewModel
 import dev.danilovteodoro.javapop.ui.viewmodel.SearchSatate
 import dev.danilovteodoro.javapop.util.AppSuggestionProvider
 import util.DataState
-import java.lang.StringBuilder
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainAct"
@@ -98,7 +97,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupRcRepositories(){
         adapter = RepositoryAdapter(this)
-        binding.rcRepositories.layoutManager = LinearLayoutManager(this)
+        binding.rcRepositories.layoutManager = GridLayoutManager(this,
+        resources.getInteger(R.integer.gridCols))
         binding.rcRepositories.adapter = adapter
     }
 
